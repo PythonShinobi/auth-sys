@@ -3,9 +3,14 @@ from datetime import datetime, timedelta
 from flask_login import login_user, logout_user, login_required, current_user
 from flask import request, jsonify, make_response
 
-from app import db
+from app import db, login_manager
 from ..auth import bp
 from ..models import User, Session
+
+# User loader function
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 @bp.route('/register', methods=['POST'])
 def register():
