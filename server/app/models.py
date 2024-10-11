@@ -13,8 +13,8 @@ class User(db.Model, UserMixin):
     email: Mapped[str] = mapped_column(String(100), unique=True, nullable=False)
     password: Mapped[str] = mapped_column(String(100), nullable=False)
 
-    # Define a relationship with the session model
-    sessions = relationship('Sessions', backref='user', lazy=True)
+    # Change the backref name to avoid conflict
+    user_sessions = relationship('Session', backref='owner', lazy=True)
 
     def set_password(self, password):
         self.password = bcrypt.generate_password_hash(password).decode('utf-8')
@@ -30,5 +30,5 @@ class Session(db.Model):
     session_token: Mapped[str] = mapped_column(String(255), nullable=False)  # Length may vary depending on token
     expires_at: Mapped[datetime] = mapped_column(DateTime, nullable=False)
 
-    # Optional relationship to link back to the user
+    # The backref here can remain the same as it refers to the User class
     user = relationship('User', backref='sessions')

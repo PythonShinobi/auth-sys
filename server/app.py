@@ -16,4 +16,4 @@ def apply_migrations():
         upgrade()  # Apply migrations automatically
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
