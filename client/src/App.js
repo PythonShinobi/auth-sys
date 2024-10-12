@@ -1,25 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+// client/src/App.js
+import React, { memo } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 
-function App() {
+import Home from "./components/Home";
+import Register from './components/Register';
+import Login from './components/Login';
+import Navbar from './components/Navbar';
+import ProtectedRoute from './components/ProtectedRoute'; 
+import ProtectedProfileRoute from './components/ProtectedProfileRoute'; // Import the new ProtectedProfileRoute
+import Profile from './components/Profile'; // Import the Profile component
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <BrowserRouter>
+        <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+          <Navbar />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route 
+              path='/register' 
+              element={
+                <ProtectedRoute>
+                  <Register />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path='/login' 
+              element={
+                <ProtectedRoute>
+                  <Login />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path='/profile' 
+              element={
+                <ProtectedProfileRoute>
+                  <Profile />
+                </ProtectedProfileRoute>
+              } 
+            />
+          </Routes>          
+        </div>
+      </BrowserRouter>
+    </AuthProvider>
   );
-}
+};
 
-export default App;
+export default memo(App);
