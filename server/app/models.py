@@ -28,7 +28,4 @@ class Session(db.Model):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     user_id: Mapped[int] = mapped_column(ForeignKey('users.id'), nullable=False)
     session_token: Mapped[str] = mapped_column(String(255), nullable=False)  # Length may vary depending on token
-    expires_at: Mapped[datetime] = mapped_column(DateTime, nullable=False)
-
-    # The backref here can remain the same as it refers to the User class
-    user = relationship('User', backref='sessions')
+    expires_at: Mapped[datetime] = mapped_column(DateTime, nullable=False)    
