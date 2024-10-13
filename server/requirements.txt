@@ -18,6 +18,7 @@ email-validator==2.1.0.post1
 Flask==2.3.2
 flask-babel==4.0.0
 Flask-CKEditor==0.4.6
+Flask-Bcrypt==1.0.1
 Flask-Cors==4.0.1
 Flask-Gravatar==0.5.0
 Flask-Login==0.6.3
