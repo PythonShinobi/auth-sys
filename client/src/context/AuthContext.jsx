@@ -1,7 +1,8 @@
 // client/src/context/AuthContext.js
 import React, { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
 import Cookies from 'js-cookie';
+
+import apiClient from "../apiClient.js";
 
 export const AuthContext = createContext();
 
@@ -32,7 +33,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     const sessionToken = getCookie('session_token');
-    await axios.post('http://127.0.0.1:5000/api/logout', { session_token: sessionToken }, { withCredentials: true });
+    await apiClient.post('/api/logout', { session_token: sessionToken });
     setIsAuthenticated(false);
     setUser(null);
     Cookies.remove('session_token'); // Remove the token on logout

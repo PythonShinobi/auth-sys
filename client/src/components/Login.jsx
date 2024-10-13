@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 
 import { AuthContext } from '../context/AuthContext';
-import apiClient from "../apiClient.js"; 
+import apiClient from "../apiClient.js";
 
 const LoginForm = () => {
   const { login } = useContext(AuthContext);  
