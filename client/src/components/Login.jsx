@@ -1,6 +1,5 @@
 // client/src/components/Login.jsx
 import React, { useContext, useState } from 'react';
-import apiClient from "./apiClient.js";
 import { useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -13,6 +12,7 @@ import {
 } from '@chakra-ui/react';
 
 import { AuthContext } from '../context/AuthContext';
+import apiClient from "../apiClient.js"; 
 
 const LoginForm = () => {
   const { login } = useContext(AuthContext);  
