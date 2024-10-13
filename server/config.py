@@ -6,13 +6,14 @@ env = ".env"
 # Load environment variable from .env file
 load_dotenv(env)
 
-db_path = os.path.join(os.path.dirname(__file__), 'app.db')
+# Use /tmp for writable access in Vercel serverless environment
+db_path = os.path.join('/tmp', 'app.db')  # Temporary path for SQLite in serverless
 
 class Config:
     # Default configuration
     SECRET_KEY = "t8hrNO6ibFODgZWxhunyhQ"
-    FRONTEND_ENDPOINT = 'http://localhost:3000'    
+    FRONTEND_ENDPOINT = 'https://auth-sys-tan.vercel.app'    
 
-    # Set the SQLAlchemy database URI for SQLite
+    # Set the SQLAlchemy database URI for SQLite in /tmp
     SQLALCHEMY_DATABASE_URI = f'sqlite:///{db_path}'  # SQLite URI format
     SQLALCHEMY_TRACK_MODIFICATIONS = False

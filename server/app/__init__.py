@@ -32,7 +32,7 @@ def create_app(config=Config):
 
     # Define CORS options
     cors_options = {
-        "origins": "https://auth-sys-tan.vercel.app",
+        "origins": flask_app.config["FRONTEND_ENDPOINT"],
         "supports_credentials": True
     }
 
