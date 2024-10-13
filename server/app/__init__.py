@@ -40,7 +40,7 @@ def create_app(config=Config):
     CORS(flask_app, resources={r"/*": cors_options})
 
     # Register the authentication blueprint.
-    from .auth import bp as auth_bp
+    from app.auth import bp as auth_bp
     flask_app.register_blueprint(auth_bp, url_prefix="/api")
 
     return flask_app
