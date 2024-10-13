@@ -23,6 +23,7 @@ const LoginForm = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
+    
     const form = event.target;
     const data = new FormData(form);
     const loginData = {

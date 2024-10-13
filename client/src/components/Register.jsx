@@ -24,6 +24,7 @@ const RegisterForm = () => {
 
   const handleRegister = async (event) => {
     event.preventDefault();
+    
     const form = event.target;
     const data = new FormData(form);
     const registerData = {
