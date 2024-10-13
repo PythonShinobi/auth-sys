@@ -3,8 +3,8 @@ from datetime import datetime, timedelta
 from flask import request, jsonify
 
 from app import db, login_manager
-from ..auth import bp
-from ..models import User, Session
+from app.auth import bp
+from app.models import User, Session
 
 # User loader function
 @login_manager.user_loader
