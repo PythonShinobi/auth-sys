@@ -1,6 +1,6 @@
 // client/src/components/Register.jsx
 import React, { useContext, useState } from 'react';
-import axios from 'axios';
+import apiClient from "./apiClient.js";
 import { useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -35,12 +35,7 @@ const RegisterForm = () => {
 
     try {
       // Make a POST request to your registration API
-      const response = await axios.post('http://127.0.0.1:5000/api/register', registerData, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true, // Ensure cookies are included in requests
-      });
+      const response = await apiClient.post('/api/register', registerData);
 
       // If registration is successful, get the session token and set it as a cookie
       const { user, session_token, message } = response.data; // Adjust based on your API response structure

@@ -1,6 +1,6 @@
 // client/src/components/Login.jsx
 import React, { useContext, useState } from 'react';
-import axios from 'axios';
+import apiClient from "./apiClient.js";
 import { useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -9,15 +9,13 @@ import {
   FormLabel,
   Input,
   Stack,
-  Text,
-  useToast,
+  Text,  
 } from '@chakra-ui/react';
 
 import { AuthContext } from '../context/AuthContext';
 
 const LoginForm = () => {
-  const { login } = useContext(AuthContext);
-  const toast = useToast();
+  const { login } = useContext(AuthContext);  
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(''); // State for error message
 
@@ -32,39 +30,20 @@ const LoginForm = () => {
     };
   
     try {
-      const response = await axios.post('http://127.0.0.1:5000/api/login', loginData, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true,
-      });
+      const response = await apiClient.post('/api/login', loginData);
     
       const { user, session_token, message } = response.data;
 
       const expires = new Date(response.data.expires_at).toUTCString();
       document.cookie = `session_token=${session_token}; path=/; expires=${expires}; SameSite=Strict; Secure;`;
     
-      login(user);
-      toast({
-        title: 'Login successful.',
-        description: message || "You've successfully logged in.",
-        status: 'success',
-        duration: 3000,
-        isClosable: true,
-      });
+      login(user);      
     
       navigate('/');
       setErrorMessage(''); // Clear error message on successful login
     } catch (error) {
       const errorMsg = error.response?.data?.error || 'An error occurred during login.';
-      setErrorMessage(errorMsg); // Set error message
-      toast({
-        title: 'Login failed.',
-        description: errorMsg,
-        status: 'error',
-        duration: 3000,
-        isClosable: true,
-      });
+      setErrorMessage(errorMsg); // Set error message      
     }
   };
 
