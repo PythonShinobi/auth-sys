@@ -1,8 +1,10 @@
 import os
 from dotenv import load_dotenv
 
+env = ".env"
+
 # Load environment variable from .env file
-load_dotenv()
+load_dotenv(env)
 
 db_path = os.path.join(os.path.dirname(__file__), 'app.db')
 
